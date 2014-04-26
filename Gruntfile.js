@@ -72,6 +72,16 @@ module.exports = function (grunt) {
                 src: 'app/js/<%= pkg.name %>.min.js',
                 dest: 'app/js/<%= pkg.name %>.min.js'
             }
+        },
+        nodewebkit: {
+            options: {
+                build_dir: './bin',
+                mac: true,
+                win: true,
+                linux32: false,
+                linux64: true
+            },
+            src: ['./app/**/*']
         }
     });
 
@@ -80,10 +90,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-dev-prod-switch');
     //grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks("grunt-remove-logging");
+    grunt.loadNpmTasks('grunt-node-webkit-builder');
     grunt.registerTask('default', [
         'concat_sourcemap',
         'removelogging',
-        'dev_prod_switch'
+        'dev_prod_switch',
+        'nodewebkit'
     ]);
 
 };
